@@ -1,3 +1,6 @@
   light.bed_light:
     google_assistant: true
     google_assistant_name: light_bed
+  light.02:
+    google_assistant: true
+    google_assistant_name: salon_plafond

@@ -82,9 +82,17 @@ google_assistant:
     light.bed_light:
       expose: true
       room: living room
+    light.02:
+      expose: true
+      room: salon
 
 light:
   - platform: demo
+  - platform: brownpaperbag_light
+    host: 192.168.1.13
+    port: 20000
+    password: azerty123
+
 cover:
   - platform: demo
 
