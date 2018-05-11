@@ -14,7 +14,7 @@ homeassistant:
   customize: !include customize.yaml
 
 # Show links to resources in log and frontend
-introduction:
+#introduction:
 
 # Enables the frontend
 frontend:
@@ -24,8 +24,11 @@ config:
 
 http:
   # Secrets are defined in the file secrets.yaml
-  # api_password: !secret http_password
-  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  api_password: !secret http_password
+  ssl_certificate: !secret ssl_certificate
+  ssl_key: !secret ssl_key
+  base_url: !secret base_url
+  #Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
 
 # Checks for available updates
@@ -41,7 +44,7 @@ updater:
 discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
+#conversation:
 
 # Enables support for tracking state changes over time
 history:
@@ -65,6 +68,28 @@ tts:
 
 # Cloud
 cloud:
+
+google_assistant:
+  project_id: !secret project_id
+  client_id: !secret client_id
+  access_token: !secret access_token
+  agent_user_id: !secret agent_user_id
+  #api_key: [a Homegraph API Key generated for the Google Actions project]
+  expose_by_default: false
+  exposed_domains:
+    - light
+  entity_config:
+    light.bed_light:
+      expose: true
+      room: living room
+
+light:
+  - platform: demo
+cover:
+  - platform: demo
+
+logger:
+  default: info
 
 group: !include groups.yaml
 automation: !include automations.yaml

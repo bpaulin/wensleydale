@@ -1,0 +1,3 @@
+  light.bed_light:
+    google_assistant: true
+    google_assistant_name: light_bed
