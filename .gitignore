@@ -6,3 +6,4 @@
 entity_registry.yaml
 secrets.yaml
 known_devices.yaml
+!LICENSE
