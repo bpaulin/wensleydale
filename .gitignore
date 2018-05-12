@@ -1,9 +1,11 @@
 *
+!*/
 !*.yaml
 !scenes
 !.gitignore
-!custom_components
 entity_registry.yaml
 secrets.yaml
 known_devices.yaml
+!custom_components/light/*
+!custom_components/cover/*
 !LICENSE

@@ -86,12 +86,17 @@ google_assistant:
       expose: true
       room: salon
 
+brownpaperbag:
+  host: 192.168.1.13
+  port: 20000
+  password: azerty123
+
 light:
   - platform: demo
   - platform: brownpaperbag_light
-    host: 192.168.1.13
-    port: 20000
-    password: azerty123
+    devices:
+      - name: salon_plafond
+        where: '02'
 
 cover:
   - platform: demo
