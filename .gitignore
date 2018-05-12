@@ -8,4 +8,5 @@ secrets.yaml
 known_devices.yaml
 !custom_components/light/*
 !custom_components/cover/*
+!custom_components/*
 !LICENSE
