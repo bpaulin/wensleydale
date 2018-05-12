@@ -15,7 +15,7 @@ CONFIG_SCHEMA = vol.Schema({
     DOMAIN: vol.Schema({
         vol.Required(CONF_HOST): cv.string,
         vol.Required(CONF_PASSWORD): cv.string,
-        vol.Optional(CONF_PORT, default = '20000'): cv.string,
+        vol.Optional(CONF_PORT, default = 20000): cv.positive_int,
     })
 }, extra=vol.ALLOW_EXTRA)
 

@@ -82,9 +82,12 @@ google_assistant:
     light.bed_light:
       expose: true
       room: living room
-    light.02:
+    light.salon_plafond:
       expose: true
+      name: 'plafond du salon'
       room: salon
+      #aliases:
+      #  - 'plafond du salon'
 
 brownpaperbag:
   host: 192.168.1.13
@@ -93,10 +96,10 @@ brownpaperbag:
 
 light:
   - platform: demo
-  - platform: brownpaperbag_light
+  - platform: brownpaperbag
     devices:
       - name: salon_plafond
-        where: '02'
+        address: '02'
 
 cover:
   - platform: demo
