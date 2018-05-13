@@ -79,15 +79,16 @@ google_assistant:
   exposed_domains:
     - light
   entity_config:
-    light.bed_light:
-      expose: true
-      room: living room
     light.salon_plafond:
       expose: true
       name: 'plafond du salon'
       room: salon
       #aliases:
       #  - 'plafond du salon'
+    light.salon_prise:
+      expose: true
+      name: 'prise du salon'
+      room: salon
 
 brownpaperbag:
   host: 192.168.1.13
@@ -95,14 +96,12 @@ brownpaperbag:
   password: azerty123
 
 light:
-  - platform: demo
   - platform: brownpaperbag
     devices:
       - name: salon_plafond
         address: '02'
-
-cover:
-  - platform: demo
+      - name: salon_prise
+        address: '01'
 
 logger:
   default: info

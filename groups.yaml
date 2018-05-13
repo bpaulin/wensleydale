@@ -1,0 +1,5 @@
+  salon:
+    name: salon
+    entities:
+      - light.salon_prise
+      - light.salon_plafond
