@@ -3,54 +3,42 @@ import logging
 import voluptuous as vol
 
 from homeassistant.components.cover import (CoverDevice, PLATFORM_SCHEMA)
-from homeassistant.const import CONF_HOST, CONF_PASSWORD, CONF_PORT
+from homeassistant.const import CONF_NAME, CONF_ADDRESS, CONF_DEVICES
 import homeassistant.helpers.config_validation as cv
 from brownpaperbag.bpbgate import BpbGate
 
-REQUIREMENTS = ['brownpaperbag']
+DOMAIN = "brownpaperbag"
+DEPENDENCIES = ['brownpaperbag']
 
 _LOGGER = logging.getLogger(__name__)
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    vol.Required(CONF_HOST): cv.string,
-    vol.Optional(CONF_PORT, default=20000): cv.positive_int,
-    vol.Required(CONF_PASSWORD): cv.string,
+    vol.Required(CONF_DEVICES): vol.All(cv.ensure_list, [
+        {
+            vol.Required(CONF_NAME): cv.string,
+            vol.Required(CONF_ADDRESS): cv.string,
+        }
+    ])
 })
 
 
 def setup_platform(hass, config, add_devices, discovery_info=None):
     """Setup the BrownPaperBage Cover platform."""
-
-    host = config.get(CONF_HOST)
-    port = config.get(CONF_PORT)
-    password = config.get(CONF_PASSWORD)
-
-    # Setup connection with devices/cloud
-    gate = BpbGate(host, port, password)
-    gate.set_logger(_LOGGER)
-    gate.connect()
-
-    # @todo Verify that passed in configuration works
-
-    # Add devices
-    ids = gate.get_cover_ids()
-    _LOGGER.info(','.join(ids))
-    add_devices(BrownPaperBagCover(cover_id, gate) for cover_id in ids)
-
+    gate_data = hass.data[DOMAIN]
+    gate = BpbGate(gate_data[0], gate_data[1], gate_data[2])
+    add_devices(BrownPaperBagCover(cover, gate) for cover in config[CONF_DEVICES])
+    
+    add_devices(BrownPaperBagCover({CONF_NAME:cover, CONF_ADDRESS:cover}, gate) for cover in gate.get_cover_ids())
 
 class BrownPaperBagCover(CoverDevice):
     """Representation of BrownPaperBag cover."""
 
-    def __init__(self, cover_id, gate: BpbGate):
+    def __init__(self, cover, gate: BpbGate):
         """Initialize the cover."""
         self._gate = gate
-        self._cover_id = cover_id
-        self._name = cover_id
-
-    # @property
-    # def should_poll(self):
-    #     """No polling needed."""
-    #     return False
+        self._cover_id = cover[CONF_ADDRESS]
+        self._name = cover[CONF_NAME]
+        self._state = None
 
     @property
     def name(self):
