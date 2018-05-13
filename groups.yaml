@@ -3,3 +3,8 @@
     entities:
       - light.salon_prise
       - light.salon_plafond
+  cuisine:
+    name: cuisine
+    entities:
+      - light.cuisine_meuble
+      - light.cuisine_plafond

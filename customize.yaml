@@ -4,3 +4,9 @@ light.salon_prise:
 light.salon_plafond:
   google_assistant: true
   google_assistant_name: plafond du salon
+light.cuisine_plafond:
+  google_assistant: true
+  google_assistant_name: plafond de la cuisine
+light.cuisine_meuble:
+  google_assistant: true
+  google_assistant_name: meuble de cuisine

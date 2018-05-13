@@ -89,6 +89,14 @@ google_assistant:
       expose: true
       name: 'prise du salon'
       room: salon
+    light.cuisine_plafond:
+      expose: true
+      name: 'plafond de la cuisine'
+      room: cuisine
+    light.cuisine_meuble:
+      expose: true
+      name: 'meuble de cuisine'
+      room: cuisine
 
 brownpaperbag:
   host: 192.168.1.13
@@ -102,6 +110,10 @@ light:
         address: '02'
       - name: salon_prise
         address: '01'
+      - name: cuisine_plafond
+        address: '0011'
+      - name: cuisine_meuble
+        address: '0012'
 
 logger:
   default: info
