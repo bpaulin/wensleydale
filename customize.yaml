@@ -10,3 +10,6 @@ light.cuisine_plafond:
 light.cuisine_meuble:
   google_assistant: true
   google_assistant_name: meuble de cuisine
+cover.cuisine:
+  google_assistant: true
+  google_assistant_name: volet de la cuisine

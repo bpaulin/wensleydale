@@ -97,6 +97,10 @@ google_assistant:
       expose: true
       name: 'meuble de cuisine'
       room: cuisine
+    cover.cuisine:
+      expose: true
+      name: 'volet de la cuisine'
+      room: cuisine
 
 brownpaperbag:
   host: 192.168.1.13

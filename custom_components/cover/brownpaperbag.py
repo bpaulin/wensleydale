@@ -25,7 +25,8 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 def setup_platform(hass, config, add_devices, discovery_info=None):
     """Setup the BrownPaperBage Cover platform."""
     gate_data = hass.data[DOMAIN]
-    gate = BpbGate(gate_data[0], gate_data[1], gate_data[2])
+    #gate = BpbGate(gate_data[0], gate_data[1], gate_data[2])
+    gate = gate_data[3]
     add_devices(BrownPaperBagCover(cover, gate) for cover in config[CONF_DEVICES])
     
     add_devices(BrownPaperBagCover({CONF_NAME:cover, CONF_ADDRESS:cover}, gate) for cover in gate.get_cover_ids())

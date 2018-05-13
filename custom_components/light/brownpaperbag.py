@@ -25,7 +25,8 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     """Setup the BrownPaperBage Light platform."""
     #import OpenWebNet
     gate_data = hass.data[DOMAIN]
-    gate = BpbGate(gate_data[0],gate_data[1],gate_data[2])
+    #gate = BpbGate(gate_data[0],gate_data[1],gate_data[2])
+    gate = gate_data[3]
     add_devices(BrownPaperBagLight(light,gate) for light in config[CONF_DEVICES])
 
 
