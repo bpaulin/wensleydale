@@ -101,6 +101,14 @@ google_assistant:
       expose: true
       name: 'volet de la cuisine'
       room: cuisine
+    cover.salon_grand:
+      expose: true
+      name: 'grand volet'
+      room: salon
+    cover.salon_petit:
+      expose: true
+      name: 'petit volet'
+      room: salon
 
 brownpaperbag:
   host: 192.168.1.13
@@ -137,6 +145,11 @@ cover:
       - name: parents_placard
         address: '16'
 
+media_player:
+  - platform: liveboxplaytv
+    host: 192.168.1.101
+    port: 8080
+     
 logger:
   default: info
 

@@ -13,3 +13,10 @@ light.cuisine_meuble:
 cover.cuisine:
   google_assistant: true
   google_assistant_name: volet de la cuisine
+cover.salon_petit:
+  friendly_name: petit
+  google_assistant: true
+  google_assistant_name: petit volet
+covers.salon_grand:
+  google_assistant: true
+  google_assistant_name: grand volet

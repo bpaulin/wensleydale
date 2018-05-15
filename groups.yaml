@@ -3,8 +3,17 @@
     entities:
       - light.salon_prise
       - light.salon_plafond
+      - cover.salon_petit
+      - cover.salon_grand
   cuisine:
     name: cuisine
     entities:
       - light.cuisine_meuble
       - light.cuisine_plafond
+      - cover.cuisine
+  jour:
+    name: jour
+    view: yes
+    entities:
+      - group.cuisine
+      - group.salon
