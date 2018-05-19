@@ -17,3 +17,9 @@
     entities:
       - group.cuisine
       - group.salon
+  system:
+    name: system
+    view: yes
+    entities:
+      - weblink.router
+      - weblink.home_assistant
