@@ -2,10 +2,10 @@ import logging
 
 import voluptuous as vol
 
-from homeassistant.components.cover import (CoverDevice, PLATFORM_SCHEMA)
+from homeassistant.components.cover import (CoverDevice, PLATFORM_SCHEMA, SUPPORT_OPEN, SUPPORT_CLOSE, SUPPORT_STOP, STATE_OPENING, STATE_CLOSING)
 from homeassistant.const import CONF_NAME, CONF_ADDRESS, CONF_DEVICES
 import homeassistant.helpers.config_validation as cv
-from brownpaperbag.bpbgate import BpbGate
+from brownpaperbag.bpbgate import BpbGate, COVER_CLOSING, COVER_OPENING
 
 DOMAIN = "brownpaperbag"
 DEPENDENCIES = ['brownpaperbag']
@@ -25,11 +25,16 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 def setup_platform(hass, config, add_devices, discovery_info=None):
     """Setup the BrownPaperBage Cover platform."""
     gate_data = hass.data[DOMAIN]
-    #gate = BpbGate(gate_data[0], gate_data[1], gate_data[2])
-    gate = gate_data[3]
+    gate = gate_data['gate']
     add_devices(BrownPaperBagCover(cover, gate) for cover in config[CONF_DEVICES])
     
-    add_devices(BrownPaperBagCover({CONF_NAME:cover, CONF_ADDRESS:cover}, gate) for cover in gate.get_cover_ids())
+    add_devices(
+        BrownPaperBagCover({CONF_NAME:address, CONF_ADDRESS:address}, gate)
+        for address
+        in gate_data['covers']
+        if address not in
+            [cover[CONF_ADDRESS] for cover in config[CONF_DEVICES]]
+    )
 
 class BrownPaperBagCover(CoverDevice):
     """Representation of BrownPaperBag cover."""
@@ -40,6 +45,7 @@ class BrownPaperBagCover(CoverDevice):
         self._cover_id = cover[CONF_ADDRESS]
         self._name = cover[CONF_NAME]
         self._state = None
+        self._supported_features = (SUPPORT_OPEN | SUPPORT_CLOSE | SUPPORT_STOP)
 
     @property
     def name(self):
@@ -62,3 +68,6 @@ class BrownPaperBagCover(CoverDevice):
     def stop_cover(self, **kwargs):
         """Stop the cover."""
         self._gate.stop_cover(self._cover_id)
+
+    def update(self):
+        self._state = self._gate.get_cover_state(self._cover_id)

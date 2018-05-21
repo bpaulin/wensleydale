@@ -24,6 +24,9 @@ def setup(hass,config):
     host = config[DOMAIN].get(CONF_HOST)
     port = config[DOMAIN].get(CONF_PORT)
     password = config[DOMAIN].get(CONF_PASSWORD)
-    gate = (host, port, password, BpbGate(host, port, password))
-    hass.data[DOMAIN] = gate
+    gate = BpbGate(host, port, password)
+    gate.poll_devices()
+    covers = gate.get_cover_ids()
+    lights = gate.get_light_ids()
+    hass.data[DOMAIN] = { 'gate': gate, 'lights': lights, 'covers': covers }
     return True

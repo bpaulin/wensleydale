@@ -23,12 +23,17 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 
 def setup_platform(hass, config, add_devices, discovery_info=None):
     """Setup the BrownPaperBage Light platform."""
-    #import OpenWebNet
     gate_data = hass.data[DOMAIN]
-    #gate = BpbGate(gate_data[0],gate_data[1],gate_data[2])
-    gate = gate_data[3]
+    gate = gate_data['gate']
     add_devices(BrownPaperBagLight(light,gate) for light in config[CONF_DEVICES])
 
+    add_devices(
+        BrownPaperBagLight({CONF_NAME: address, CONF_ADDRESS: address}, gate)
+        for address
+        in gate_data['lights']
+        if address not in
+        [light[CONF_ADDRESS] for light in config[CONF_DEVICES]]
+    )
 
 class BrownPaperBagLight(Light):
     """Representation of an BrownPaperBag Light."""
