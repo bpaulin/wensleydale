@@ -1,0 +1,18 @@
+  dodo_enfant:
+    sequence:
+      - service: light.turn_off
+        data:
+          entity_id: light.enfant
+      - service: cover.close_cover
+        data:
+          entity_id: cover.enfant
+  reveil_enfant:
+    sequence:
+      - service: cover.open_cover
+        data:
+          entity_id: cover.enfant
+      - delay:
+          seconds: 3
+      - service: cover.stop_cover
+        data:
+          entity_id: cover.enfant

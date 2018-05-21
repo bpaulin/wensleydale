@@ -1,25 +1,80 @@
   salon:
     name: salon
+    icon: mdi:sofa
     entities:
       - light.salon_prise
       - light.salon_plafond
       - cover.salon_petit
       - cover.salon_grand
+      - cover.salon
   cuisine:
     name: cuisine
+    icon: mdi:stove
     entities:
       - light.cuisine_meuble
       - light.cuisine_plafond
       - cover.cuisine
-  jour:
-    name: jour
-    view: yes
+  couloir:
+    name: couloir
+    icon: mdi:walk
     entities:
-      - group.cuisine
-      - group.salon
+      - light.couloir
+  sdb:
+    name: salle de bain
+    icon: mdi:shower
+    entities:
+      - light.sdb_plafond
+      - light.sdb_prise
+  wc:
+    name: toilettes
+    icon: mdi:toilet
+    entities:
+      - light.wc
+  buanderie:
+    name: buanderie
+    icon: mdi:washing-machine
+    entities:
+      - light.buanderie
+  bureau:
+    name: bureau
+    icon: mdi:desktop-classic
+    entities:
+      - light.bureau
+      - cover.bureau
+  enfant:
+    name: enfant
+    icon: mdi:human-child
+    entities:
+      - light.enfant
+      - cover.enfant
+  parents:
+    name: parents
+    icon: mdi:human-male-female
+    entities:
+      - light.parents
+      - cover.parents_porte
+      - cover.parents_placard
+      - cover.parents
+
   system:
     name: system
     view: yes
     entities:
       - weblink.router
       - weblink.home_assistant
+  jour:
+    name: Jour
+    view: yes
+    entities:
+      - group.cuisine
+      - group.salon
+      - group.couloir
+  nuit:
+    name: Nuit
+    view: yes
+    entities:
+      - group.enfant
+      - group.parents
+      - group.bureau
+      - group.sdb
+      - group.wc
